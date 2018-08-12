@@ -13,7 +13,21 @@ class AddProject extends Component {
   };
 
   handleSubmit(e) {
-    console.log("Submitted");
+    if (this.refs.title.value === "") {
+      alert("Tittle Required");
+    } else {
+      this.setState(
+        {
+          newProject: {
+            title: this.refs.title.value,
+            category: this.refs.category.value
+          }
+        },
+        function() {
+          console.log(this.state);
+        }
+      );
+    }
     e.preventDefault();
   }
 
@@ -28,10 +42,10 @@ class AddProject extends Component {
     return (
       <div>
         <h3>Add Project</h3>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <div>
             <label>Title</label>
-            <input type="text" ref="Title" />
+            <input type="text" ref="title" />
           </div>
           <div>
             <label>Category</label>
